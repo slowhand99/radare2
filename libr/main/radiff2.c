@@ -797,6 +797,9 @@ static ut8 *get_strings(RCore *c, int *len) {
 	RListIter *iter;
 	RBinString *str, *old = NULL;
 	ut8 *buf, *ptr;
+	if (!list) {
+		return NULL;
+	}
 
 	r_list_sort (list, (RListComparator) bs_cmp);
 

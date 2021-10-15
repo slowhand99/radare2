@@ -1623,7 +1623,6 @@ static bool cmd_op(RCore *core, char mode, int fd) {
 			r_core_block_read (core);
 			return true;
 		}
-		eprintf ("Invalid RBinFile.id number.\n");
 	}
 	return false;
 }
