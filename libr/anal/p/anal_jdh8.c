@@ -48,7 +48,7 @@ static bool set_reg_profile(RAnal *anal) {
 
 /* That 3 is a hack */
 static const int i4004_ins_len[16] = {
-	1, 2, 3, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1
+	2, 3, 3, 1, 1, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2
 };
 
 static const char *i4004_e[16] = {
@@ -89,11 +89,14 @@ static const char *i4004_f[16] = {
 	"invalid"
 };
 
-static int i4004_get_ins_len (ut8 hex) {
-	ut8 high = (hex & 0xf0)>>4;
-	int ret = i4004_ins_len[high];
+static int jdh_get_ins_len (ut8 hex) {
+	ut8 high = (hex & 0xf0) >> 4;
+	int ret = jdh_len[high];
 	if (ret == 3) {
-		ret = (hex & 1) ? 1 : 2;
+		ret = (hex & 8) ? 2 : 3;
+	}
+	else if (ret == 1) {
+		ret = (hex & 8) ? 1 : 2;
 	}
 	return ret;
 }
